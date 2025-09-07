@@ -1,7 +1,7 @@
 // Google Safe Browsing API integration with key rotation
 const API_KEYS = [
-    ' ',  // ← Replace with your actual key
-    ' '   // ← Replace with your actual key
+    'YOUR_API_KEY_HERE',  // ← Replace with your actual key
+    'YOUR_API_KEY_HERE'   // ← Replace with your actual key
 ];
 let currentKeyIndex = 0;
 const CACHE = new Map();
