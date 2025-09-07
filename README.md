@@ -21,6 +21,16 @@ Secure Inbox is a browser extension that protects Gmail & Outlook users from phi
 - popup/ → Extension popup UI
 - assets/ → Icons
 
+## Screenshots
+### Inactive Page
+![Inacive Page](Extension_Screenshots/1.Inactive_Page.png)
+
+### Dashboard
+![Dashboard](Extension_Screenshots/2.Dashboard.png)
+
+### Help
+![Help](Extension_Screenshots/5.Help.png)
+
 ## Setup
 1. Clone repo
 2. Load as **Unpacked Extension** in Chrome:  
