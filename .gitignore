@@ -1,0 +1,15 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node/Python environments (if used in future)
+node_modules/
+venv/
+.env
+
+# Build
+dist/
+build/

@@ -1,0 +1,119 @@
+/* Trust badge styles */
+.trust-badge {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.trust-progress {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(white 65%, transparent 66%),
+    conic-gradient(#4ade80 0 calc(var(--progress) * 1%), #e2e8f0 0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.trust-score {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+.trust-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2d3748;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.trust-badge:hover .trust-tooltip {
+  opacity: 1;
+}
+
+/* Warning banner styles */
+.warning-banner {
+  background: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 12px 15px;
+  margin: 10px 0;
+  font-size: 14px;
+  color: #d97706;
+  display: flex;
+  align-items: center;
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease;
+}
+
+.warning-banner.high-risk {
+  background: #ffebee;
+  border-left-color: #f44336;
+  color: #d32f2f;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.warning-icon {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.warning-text {
+  flex: 1;
+  font-weight: 500;
+}
+
+.security-scan-button {
+  background-color: #4299e1;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: background-color 0.2s;
+}
+
+.security-scan-button:hover {
+  background-color: #3182ce;
+}
+
+/* Threat styling */
+.potential-threat {
+  background-color: rgba(255, 235, 235, 0.3) !important;
+  border-left: 3px solid #f44336 !important;
+}
+
+/* Animation for new emails */
+@keyframes highlight {
+  0% { background-color: rgba(255, 235, 59, 0.3); }
+  100% { background-color: transparent; }
+}
+
+[data-trust-analyzed="true"] {
+  animation: highlight 1.5s ease;
+}

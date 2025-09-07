@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "AI-Powered Secure Inbox",
+  "version": "1.0",
+  "description": "Protects your inbox from phishing and malicious emails",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "alarms",
+    "notifications",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://safebrowsing.googleapis.com/*",
+    "https://www.virustotal.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "content_scripts": [{
+    "matches": ["https://mail.google.com/*"],
+    "js": ["content/gmail-content.js"],
+    "css": ["content/content.css"]
+  }]
+}

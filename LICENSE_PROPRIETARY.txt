@@ -1,0 +1,7 @@
+Copyright (c) 2025 Sanket S Patwalkar. All rights reserved.
+
+This source code and related files are proprietary and confidential.
+No permission is granted to use, copy, modify, or distribute this
+project without explicit written consent from the owner.
+
+For demonstration and recruitment purposes only.

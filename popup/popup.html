@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Inbox</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="inactive-view" class="container inactive-view">
+    <div class="inactive-header">
+      <img src="assets/icon128.png" alt="Secure Inbox" class="inactive-icon">
+      <h1>Secure Inbox</h1>
+    </div>
+    <p>Extension is currently inactive</p>
+    <p>Open Gmail to enable protection</p>
+    <div class="inactive-actions">
+      <button id="open-gmail" class="action-button">
+        <img src="assets/gmail-icon.png" alt=""> Open Gmail
+      </button>
+
+    </div>
+  </div>
+
+  <div id="active-view" class="container active-view">
+    <header>
+      <div class="app-header">
+        <img src="assets/icon48.png" alt="Secure Inbox" class="app-icon">
+        <h1>Secure Inbox</h1>
+      </div>
+      <div class="status">
+        <div class="indicator active"></div>
+        <span>Protection Active</span>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button data-target="dashboard" class="tab active">
+        <i class="icon-dashboard"></i> Dashboard
+      </button>
+      <button data-target="history" class="tab">
+        <i class="icon-history"></i> History
+      </button>
+      <button data-target="settings" class="tab">
+        <i class="icon-settings"></i> Settings
+      </button>
+      <button data-target="help" class="tab">
+        <i class="icon-help"></i> Help
+      </button>
+      <button data-target="about" class="tab">
+        <i class="icon-about"></i> About
+      </button>
+    </nav>
+
+    <section id="dashboard" class="tab-content active">
+      <div class="stats">
+        <div class="stat-card">
+          <div id="emails-scanned" class="value">0</div>
+          <div class="label">Emails Scanned</div>
+        </div>
+        <div class="stat-card">
+          <div id="threats-blocked" class="value">0</div>
+          <div class="label">Threats Blocked</div>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button id="scan-now" class="action-button">
+          <i class="icon-scan"></i> Scan Now
+        </button>
+        <button id="refresh-stats" class="action-button secondary">
+          <i class="icon-refresh"></i> Refresh Stats
+        </button>
+      </div>
+      
+      <div class="progress-bar" style="display: none;">
+        <div class="progress"></div>
+      </div>
+      
+      <div class="recent-threats">
+        <h3>Recent Threats</h3>
+        <div id="threats-list" class="threats-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="tab-content">
+      <div class="history-controls">
+        <input type="text" id="history-search" placeholder="Search history...">
+        <select id="history-filter">
+          <option value="all">All scans</option>
+          <option value="threats">Threats only</option>
+          <option value="safe">Safe emails</option>
+        </select>
+      </div>
+      <div id="history-list" class="history-list">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <section id="settings" class="tab-content">
+      <div class="settings-group">
+        <h3>Protection Settings</h3>
+        <label class="switch">
+          <input type="checkbox" id="enable-phishing" checked>
+          <span class="slider"></span>
+          <span>Phishing Detection</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="enable-link-check" checked>
+          <span class="slider"></span>
+          <span>Link Safety Check</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="enable-notifications" checked>
+          <span class="slider"></span>
+          <span>Notifications</span>
+        </label>
+      </div>
+      
+      <div class="settings-group">
+        <h3>Scan Options</h3>
+        <label class="switch">
+          <input type="checkbox" id="scan-contacts">
+          <span class="slider"></span>
+          <span>Skip trusted contacts</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="scan-images">
+          <span class="slider"></span>
+          <span>Analyze images</span>
+        </label>
+      </div>
+      
+      <div class="settings-group">
+        <h3>API Configuration</h3>
+        <div class="api-config">
+          <label>Safe Browsing API Keys</label>
+          <textarea id="safebrowsing-keys" placeholder="Enter keys separated by commas"></textarea>
+        </div>
+        <div class="api-config">
+          <label>VirusTotal API Keys</label>
+          <textarea id="virustotal-keys" placeholder="Enter keys separated by commas"></textarea>
+        </div>
+        <button id="save-api-keys" class="action-button">Save API Keys</button>
+      </div>
+    </section>
+
+    <section id="help" class="tab-content">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-item">
+        <div class="faq-question">How does the extension detect phishing emails?</div>
+        <div class="faq-answer">
+          Our extension uses heuristic analysis to identify phishing attempts by:
+          <ul>
+            <li>Checking for suspicious sender domains</li>
+            <li>Scanning for known phishing keywords</li>
+            <li>Identifying urgency language</li>
+            <li>Analyzing link safety with Safe Browsing and VirusTotal</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">Why do I need to provide API keys?</div>
+        <div class="faq-answer">
+          For enhanced security checks, we use:
+          <ul>
+            <li><strong>Google Safe Browsing API</strong>: Checks URLs against known threats</li>
+            <li><strong>VirusTotal API</strong>: Scans URLs with multiple antivirus engines</li>
+          </ul>
+          You can get these keys from:
+          <ul>
+            <li>Safe Browsing: https://console.cloud.google.com</li>
+            <li>VirusTotal: https://www.virustotal.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">How do I report a false positive?</div>
+        <div class="faq-answer">
+          Please contact our support team at support@secureinbox.com with:
+          <ul>
+            <li>Email sender and subject</li>
+            <li>Screenshot of the warning</li>
+            <li>Why you believe it's a false positive</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="support-contact">
+        <h3>Support Contact</h3>
+        <p>Email: support@secureinbox.com</p>
+        <p>Response time: 24-48 business hours</p>
+      </div>
+    </section>
+
+    <section id="about" class="tab-content">
+      <div class="about-header">
+        <img src="assets/icon128.png" alt="Secure Inbox" class="about-icon">
+        <h2>Secure Inbox</h2>
+        <div class="version">Version 1.0</div>
+      </div>
+      
+      <div class="about-description">
+        <p>AI-powered email security extension designed to protect your inbox from phishing attempts and malicious content.</p>
+        <p>Developed as a student project focusing on cybersecurity and browser extension development.</p>
+      </div>
+      
+      <div class="features-list">
+        <h3>Key Features</h3>
+        <ul>
+          <li>Real-time email scanning</li>
+          <li>Phishing detection heuristics</li>
+          <li>Link safety verification</li>
+          <li>Trust score visualization</li>
+          <li>Threat notifications</li>
+          <li>Scan history tracking</li>
+        </ul>
+      </div>
+      
+      <div class="developer-info">
+        <h3>Developer Information</h3>
+        <p>Created by: Sanket P.</p>
+        <p>Project Duration: 4 weeks</p>
+        <p>Tools: VS Code, Chrome DevTools</p>
+      </div>
+      
+      <div class="privacy-policy">
+        <h3>Privacy Policy</h3>
+        <p>We respect your privacy. All email analysis happens locally in your browser. No personal data is collected or sent to external servers.</p>
+        <p>API keys are stored securely in your browser's local storage.</p>
+      </div>
+    </section>
+  </div>
+  
+  <script src="popup_with_timer.js" type="module"></script>
+</body>
+</html>
